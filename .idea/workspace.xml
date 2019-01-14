@@ -36,19 +36,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="111" />
+          <entry key="PLAIN_TEXT" value="186" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
-      <command text=".git branche" />
-      <command text=".git branch" />
-      <command text="git branch" />
-      <command text="s server:run " />
-      <command text="git branch deesign" />
-      <command text="git push origin master" />
       <command text="git clone https://github.com/paul-chavernac/PPE3.git" />
       <command text="commit" />
       <command text="git commit" />
@@ -67,6 +61,12 @@
       <command text="git push origin master" />
       <command text="git add remote" />
       <command text="git remote add origin https://github.com/paul-chavernac/Projet-site-vente.git" />
+      <command text="git push origin master" />
+      <command text="git add *" />
+      <command text="git commit -v" />
+      <command text="git commit -v &quot;Mise en place projet&quot;" />
+      <command text="git commit -m &quot;Mise en place projet&quot;" />
+      <command text="git push" />
       <command text="git push origin master" />
     </commandsHistory>
   </component>
@@ -230,12 +230,12 @@
       <workItem from="1547454142913" duration="468000" />
       <workItem from="1547454626413" duration="2605000" />
       <workItem from="1547457244439" duration="1834000" />
-      <workItem from="1547469186850" duration="683000" />
+      <workItem from="1547469186850" duration="1130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5590000" />
+    <option name="totallyTimeSpent" value="6037000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
