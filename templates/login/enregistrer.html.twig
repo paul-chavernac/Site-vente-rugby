@@ -1,0 +1,52 @@
+{# empty Twig template #}
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="row text-center justify-content-center "><h2>Créer un compte</h2></div>
+        <br>
+        {% if message %}
+            <div class="row text-center justify-content-center ">
+                <div 
+                    {% if succes %} class="alert alert-success" 
+                    {% else %} class="alert alert-danger" {% endif%}
+                    role="alert">
+                    {{message}}
+                </div>
+            </div>
+        {% endif%}
+        <br/>
+        <div class="row text-center justify-content-center ">
+
+            <form action="{{ path('creerCompte') }}" method="post">
+                <div  class="form-group">
+                    <label for="username">Identifiant :</label>
+                    <input required class="form-control" type="text" id="username" name="user"/>
+                </div>
+                <div  class="form-group">
+                    <label for="mail">E-mail :</label>
+                    <input required class="form-control" type="email" id="mail" name="mail" />
+                </div>
+                <div  class="form-group">
+                    <label for="mdp">Mot de passe :</label>
+                    <input  class="form-control" type="password" id="mdp" name="mdp" />
+                </div>
+
+                
+
+                <div  class="form-group">
+                    <label for="mdpVerif">Verifier :</label>
+                    <input  class="form-control" type="password" id="mdpVerif" name="mdpVerif" />
+                </div>
+
+                
+                <button class="btn btn-brown-border" type="submit">Valider</button>
+            </form>
+
+
+        </div>
+    </div>
+{% endblock body %}
+{% block javascripts %}
+    
+{% endblock javascripts %}

@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <div class="container">
+        <h1 class="center text-center font-fam-courrier " style="margin-top: 20px; font-size: 50px;"><i>
+                Tableau de bord
+            </i></h1>
+    </div>
+    <div class="container font-fam-courrier" style="margin-top: 50px;" >
+        <div class="offset-2">
+
+            <h4>&bull; Nombre de clients : {{nbUser}} </h4>
+
+            <h4>&bull; Nombre de produits : {{nbProduits}} </h4> 
+
+            <h4>&bull; Nombre de commandes : {{nbcommandes}} </h4> 
+
+            <h4>&bull; Chiffre d'affaire :</h4> 
+            <table class="table" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Année</th>
+                            <th scope="col">Chiffre d'affaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ca in chiffreAffaire%}
+                            <tr>
+                                <th scope="row">
+                                    {{ca.anneeca}}
+                                </th>
+                                <td>
+                                    {{ca.ca}} €
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+{%endblock%}
