@@ -1,0 +1,5 @@
+vendor/
+var/cache/
+public/build/
+public/bundles/
+node_modules/
