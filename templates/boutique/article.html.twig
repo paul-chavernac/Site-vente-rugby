@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+{% block title %}Sell - {{ controller_name }}{% endblock %}
+{% block body %}
+
+<div class="super_container">
+
+	<div class="super_container_inner">
+		<div class="super_overlay"></div>
+
+		
+		<!-- Product -->
+
+		<div class="product">
+			<div class="container">
+				<div class="row">
+					
+					<!-- Product Image -->
+					<div class="col-lg-6">
+						<div class="product_image_slider_container">
+							<div id="slider" class="flexslider">
+								<img src="{{article.image}}" alt="" width="500" height="500"/>		
+							</div>
+						</div>
+					</div>
+
+					<!-- Product Info -->
+					<div class="col-lg-6 product_col">
+						<div class="product_info">
+							<div class="product_name">{{ article.titre }}</div>
+							<div class="product_price"><span>{{ article.prix}} €</span></div>
+							<div class="product_text">
+								<p>{{ article.description | raw }}</p>
+							</div>
+							{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+							 <!-- <button type="button" >Ajouter panier</button> -->
+							<div class="ui vertical animated button" id="addPanier" tabindex="0">
+								<div class="hidden content">Shop</div>
+								<div class="visible content">
+									<i class="shop icon"></i>
+								</div>
+							</div>
+							{% else %}
+							<a href="{{ path('fos_user_security_login') }}">
+								<div class="ui vertical animated button" tabindex="0">
+									<div class="hidden content">Shop</div>
+									<div class="visible content">
+										<i class="shop icon"></i>
+									</div>
+								</div>
+							</a>
+							{% endif %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+		
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+	$(document).ready( function() {
+
+        //FUNCTION AJAX
+        function reqAjax(){
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: "{{ path('article', {'id' : app.request.get('_route_params')['id']}) }}",
+                success: function (data) {
+                    if(data['response'] == "1"){
+                        $('#addPanier .content .icon').removeClass('shop').addClass('check circle');
+                        $('#addPanier .hidden.content').html('');
+                        $('#addPanier').removeClass('loading vertical animated').removeAttr("id");
+                        $(".cart-notif").html(data['newCountPanier'])
+                        //alert
+                        $.confirm({
+                            icon: 'fa fa-question-circle-o',
+                            theme: 'supervan',
+                            title: 'Article au panier !',
+                            closeIcon: false,
+                            content: 'Cet article a été correctement ajouté à votre panier',
+                            animation: 'scale',
+                            type: 'success',
+                            buttons: {
+                              Continuer: function () {
+                                return;
+                              },
+                              Commander: function () {
+                                window.location.replace("{{ path('panier') }}");
+                              }
+                            }
+                        });
+                        return 1;
+                    } else {
+                        $('#addPanier').removeClass('loading');
+                        alert('Il y a eu un problème ! -> '+data);
+                        return 0;
+                    }
+                },
+                complete : function(){
+                    // do
+                }
+            });
+        }
+
+        $('#addPanier').click(function(){
+                $(this).addClass('loading');
+                reqAjax();
+        });
+    });
+</script>
+{% endblock %}

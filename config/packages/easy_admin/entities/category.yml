@@ -1,0 +1,16 @@
+easy_admin:
+   entities:
+       Category :
+          disabled_actions: ['edit', 'show']
+          class: App\Entity\Categorie
+          label: 'Catégories'
+          list:
+              actions:
+                  - { name: 'deleteFromList', type: 'method', label: '' }
+                  - { name: '-delete' }
+              sort: ['libelle', 'ASC']
+              title: "Liste des %%entity_label%%"
+              fields:
+                  - { property: 'libelle', label: 'Titre' }
+          search:
+            fields: ['libelle']

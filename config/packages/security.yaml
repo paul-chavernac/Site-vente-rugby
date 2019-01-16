@@ -1,56 +1,40 @@
-#security:
-#    # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-#    providers:
-#        in_memory: { memory: ~ }
-#    firewalls:
-#        dev:
-#            pattern: ^/(_(profiler|wdt)|css|images|js)/
-#            security: false
-#        main:
-#            anonymous: ~
-#
-#            # activate different ways to authenticate
-#
-#            # http_basic: ~
-#            # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-#
-#            # form_login: ~
-#            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
-
+# config/packages/security.yaml
 security:
-    providers:
-        mysql:
-            entity:
-                class: App\Entity\User
-                property: userName
-                
     encoders:
-        App\Entity\User:
-            algorithm: bcrypt
-            encode_as_base64: false
-            iterations: 13
-            
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
     firewalls:
-        
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
         main:
-            anonymous: true
             pattern: ^/
             form_login:
-                login_path: login #route vers login
-                
-                check_path: login #route qui va verifier que le login est ok ou non
-                default_target_path: home
-                
-            provider: mysql #les donnees proviennent de mysql
-            logout:
-                path: /logout  #route de deconnexion
-                target: / #la deconnexion redige vers
-                
-    role_hierarchy:
-        ROLE_ADMIN: ROLE_USER #deux roles pris en comptes , admin>user
-        
-    access_control: #controle d'acces
-    - { path: ^/perso, roles: ROLE_ADMIN}
-    - { path: ^/visiteur, roles: ROLE_USER}
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
 
-    #~{path: ^/, roles: ROLE_ADMIN}
+                provider: fos_userbundle
+                # csrf_token_generator: security.csrf.token_manager #non necessaire pour un login simple
+            logout:
+                path:       fos_user_security_logout
+                target:     fos_user_security_login
+
+            anonymous: true
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+    - { path: ^/routeconnexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/routeinscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin/, role: ROLE_ADMIN }
+    - { path: ^/commander, roles: ROLE_USER }
+    - { path: ^/payement, roles: ROLE_USER }
+    - { path: ^/confirmer, roles: ROLE_USER }
+    - { path: ^/register, roles: ROLE_ADMIN }

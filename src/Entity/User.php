@@ -1,111 +1,130 @@
 <?php
-
+// src/Entity/User.php
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 /**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
- */
-class User implements UserInterface, \Serializable{
+* @ORM\Entity
+* @ORM\Table(name="fos_user")
+*/
+class User extends BaseUser
+{
+    /**
+    * @ORM\Id
+    * @ORM\Column(type="integer")
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(name="user_name", type="string", length=255, nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Panier", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $userName;
+    private $panier;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\IdentityUser", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $password;
+    private $identityUser;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean", nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\LivraisonUser", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $isActive;
+    private $livraisonUser;
 
     /**
-     * @ORM\Column(name="role", type="string", length=255, nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\CommandeOrder", mappedBy="user")
      */
-    private $role;
+    private $commandeOrders;
+
+    public function __construct()
+    {
+    parent::__construct();
+    $this->commandeOrders = new ArrayCollection();
+    $this->paniers = new ArrayCollection();
+    // your own logic
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(Panier $panier): self
+    {
+        $this->panier = $panier;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $panier->getUser()) {
+            $panier->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getIdentityUser(): ?IdentityUser
+    {
+        return $this->identityUser;
+    }
+
+    public function setIdentityUser(?IdentityUser $identityUser): self
+    {
+        $this->identityUser = $identityUser;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $identityUser === null ? null : $this;
+        if ($newUser !== $identityUser->getUser()) {
+            $identityUser->setUser($newUser);
+        }
+
+        return $this;
+    }
+
+    public function getLivraisonUser(): ?LivraisonUser
+    {
+        return $this->livraisonUser;
+    }
+
+    public function setLivraisonUser(?LivraisonUser $livraisonUser): self
+    {
+        $this->livraisonUser = $livraisonUser;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $livraisonUser === null ? null : $this;
+        if ($newUser !== $livraisonUser->getUser()) {
+            $livraisonUser->setUser($newUser);
+        }
+
+        return $this;
+    }
 
     /**
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
-
-    function __toString() {
-        return $this->userName;
+    * @return Collection|CommandeOrder[]
+    */
+    public function getCommandeOrders(): Collection
+    {
+        return $this->commandeOrders;
     }
 
-    function getUserName() {
-        return $this->userName;
+    public function addCommandeOrder(CommandeOrder $commandeOrder): self
+    {
+        if (!$this->commandeOrders->contains($commandeOrder)) {
+            $this->commandeOrders[] = $commandeOrder;
+            $commandeOrder->setUser($this);
+        }
+        return $this;
     }
 
-    function getPassword() {
-        return $this->password;
+    public function removeCommandeOrder(CommandeOrder $commandeOrder): self
+    {
+        if ($this->commandeOrders->contains($commandeOrder)) {
+            $this->commandeOrders->removeElement($commandeOrder);
+            // set the owning side to null (unless already changed)
+            if ($commandeOrder->getUser() === $this) {
+                $commandeOrder->setUser(null);
+            }
+        }
+        return $this;
     }
-
-    function getIsActive() {
-        return $this->isActive;
-    }
-
-    function getRole() {
-        return $this->role;
-    }
-
-    function getEmail() {
-        return $this->email;
-    }
-
-    function setUserName($userName) {
-        $this->userName = $userName;
-    }
-
-    public function setPassword(String $password) {
-        $this->password = password_hash($password, PASSWORD_BCRYPT, array("cost" => 13));
-    }
-
-    function setIsActive($isActive) {
-        $this->isActive = $isActive;
-    }
-
-    function setRole($role) {
-        $this->role = $role;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
-    }
-
-    public function getSalt() {
-        return null;
-    }
-
-    public function eraseCredentials() {
-        
-    }
-
-    public function getRoles() {
-        return array($this->role);
-    }
-
-    public function serialize() {
-        return serialize(array(
-            $this->userName,
-            $this->password
-        ));
-    }
-
-    public function unserialize($serialized) {
-        list (
-                $this->userName,
-                $this->password
-                ) = unserialize($serialized);
-    }
-
 }

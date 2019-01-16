@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+{% block title %}Sell - {{ controller_name }}{% endblock %}
+{% block body %}
+
+<div class="super_container">
+
+	<div class="super_container_inner">
+		<div class="super_overlay"></div>
+
+		<!-- Home -->
+
+		<div class="home">
+			<div class="home_container d-flex flex-column align-items-center justify-content-end">
+				<div class="home_content text-center">
+					<div class="home_title">Panier</div>
+					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
+						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
+							<li><a href="/">Accueil</a></li>
+							<li>Votre Panier</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="cart_section">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="cart_container">
+							
+							<!-- Cart Bar -->
+							<div class="cart_bar">
+								<ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-end">
+									<li class="mr-auto">Produit</li>
+									<li></li>
+									<li>Prix</li>
+								</ul>
+							</div>
+
+							<!-- Cart Items -->
+							<div class="cart_items">
+								<ul class="cart_items_list">
+
+									{% set totalPrix = 0 %}
+									{% set nbArticle = 0 %}
+									{% for article in articlesPanier %}
+									{% set totalPrix = totalPrix + article.prix %}
+									{% set nbArticle = nbArticle + 1 %}
+									<!-- Cart Item -->
+									<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-end justify-content-start">
+										<div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto">
+											<div><div class="product_number">1</div></div>
+											<div><div class="product_image"><img src="{{ article.image }}" alt=""></div></div>
+											
+											<div class="product_name" style="margin-left: 80px;"><a href="path('article',{'id': produit.id})">{{ article.titre }}</a></div>
+											<div class="product_text" style="margin-left: 40px;">{{ article.description | raw }}</div>
+											
+										</div>
+										<div class="product_quantity_container">
+											<button type="button" name="{{ article.id }}" class="ui right floated red button supprArticle">
+                                            	Supprimer
+                                            	<i class="right chevron icon"></i>
+                                        	</button>
+										</div>
+										<div class="product_total product_text"><span>Total: </span>{{ article.prix }}€</div>
+									</li>
+									{% endfor %}
+								</ul>
+							</div>		
+						</div>
+					</div>
+				</div>
+
+				<div class="row cart_extra_row">
+					<div class="col-lg-6 cart_extra_col">
+						<div class="cart_extra cart_extra_2">
+							<div class="cart_extra_content cart_extra_total">
+								<div class="cart_extra_title">Panier</div>
+								<ul class="cart_extra_total_list">
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_extra_total_title">Total du Panier</div>
+										<div class="cart_extra_total_value ml-auto">{{ totalPrix }}€</div>
+									</li>
+								{% if nbArticle < 1 %}
+								<div class="checkout_button trans_200"><a href="{{ path('produit') }}">Commander</a></div>
+								{% else %}
+								<div class="checkout_button trans_200"><a href="{{ path('civil') }}">Commander</a></div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+		
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready( function() {
+
+        //FUNCTION AJAX
+        function reqAjax(id){
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: "{{ path('panier') }}",
+                data: {'id': id},
+                success: function (data) {
+                    if(data == "1"){
+                        alert('Article supprimé du panier !');
+						//REFRESH
+						location.href = "{{ path('panier') }}"
+                        return;
+                    } else {
+                        alert('Il y a eu un problème ! -> '+data);
+                        return;
+                    }
+                },
+                complete : function(){
+                    // do
+                }
+            });
+        }
+        $('.supprArticle').click(function(){
+            var id = $(this).attr('name');
+            reqAjax(id);
+        });
+    });
+</script>
+{% endblock %}

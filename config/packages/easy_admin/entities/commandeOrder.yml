@@ -1,0 +1,32 @@
+easy_admin:
+   entities:
+       CommandeOrder :
+          disabled_actions: ['new', 'delete']
+          class: App\Entity\CommandeOrder
+          label: 'Commandes'
+          show:
+              title: 'Visualisation de commande [N°%%entity_id%%]'
+              fields:
+                  - { property: 'user', label: 'Client' }
+                  - { property: 'reference', label: 'Référence' }
+                  - { property: 'status', label: 'Statut' }
+                  - { property: 'date', label: 'Créee le' }
+                  - { property: 'commentaire', label: 'Commentaire' }
+                  - { property: 'produit', label: "Articles" }
+                  - { property: 'livraison', label: 'Adresse de livraison' }
+                  - { property: 'identity', label: 'Informations identitaire' }
+                  - { property: 'paymentOrder', label: 'Informations sur le paiement' }
+          edit:
+              title: 'Edition de commande [N°%%entity_id%%]'
+              fields:
+                  - { type: 'tab' , label: 'Infos commande', icon: 'user' }
+                  - { property: 'status', label: 'Statut', type: 'choice', type_options: { multiple: false, choices: { 'Annulée': 'Annulée', 'En attente': 'En attente', 'Traitement en cours': 'Traitement en cours', 'Finalisée': 'Finalisée' } } }
+          list:
+              max_results: 5
+              sort: ['date', 'DESC']
+              title: "Liste des %%entity_label%%"
+              fields:
+                  - { property: 'reference', label: 'Référence' }
+                  - { property: 'status', label: 'Statut' }
+                  - { property: 'date', label: 'Créee le' }
+                  - { property: 'user', label: 'Client' }

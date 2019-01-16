@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+{% block title %}Sell - {{ controller_name }}{% endblock %}
+{% block body %}
+
+<div class="super_container">
+
+	<div class="super_container_inner">
+		<div class="super_overlay"></div>
+        <div class="products">
+
+           <div class="html ui top attached segment">
+                <div class="ui four top attached steps">
+                    <div class="completed step">
+                        <i class="user icon"></i>
+                        <div class="content">
+                        <div class="title">Information</div>
+                        <div class="description">Vos informations personnelles</div>
+                    </div>
+                    </div><div class="active step">
+                        <i class="truck icon"></i>
+                        <div class="content">
+                        <div class="title">Livraison</div>
+                        <div class="description">Information sur la Livraision</div>
+                        </div>
+                    </div>
+                    <div class="disabled step">
+                        <i class="payment icon"></i>
+                        <div class="content">
+                        <div class="title">Payement</div>
+                        <div class="description">Votre méthode de payement</div>
+                        </div>
+                    </div>
+                    <div class="disabled step">
+                        <i class="info icon"></i>
+                        <div class="content">
+                        <div class="title">Confirmation</div>
+                        <div class="description">Verifier vos details</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container double">
+                <div class="box">
+
+                    <div class="ui grid">
+                        <div class="left floated six wide column" style="margin-left: 60px;">
+                            <div class="ui segment" style="margin-bottom: 10px; background: #414141;">
+                                <h3 style="text-align: center; color: white;">Mode de Livraison</h3>
+                            </div>
+                            <div class="ui segment" style="margin-bottom: 10px">
+
+                                <div class="ui form">
+                                    
+                                    <div class="grouped fields">
+                                        <label for="mode" style="color: #969696;">Choississez votre mode de livraison:</label>
+
+                                        {% for livraison in modeLivraison %}
+                                        <div class="field">
+                                            <a href="{{ path('livraison', {"choice": livraison.id}) }}">
+                                                <div class="ui selectMode">
+                                                    <div style="text-align: center; margin-bottom: 2%; ">
+                                                        <label style="padding-top: 5%; color : hsl(0, 88%, 42%);" > {{ livraison.mode }} </label> 
+                                                    </div>
+                                                    <p class="descriptionInfo"> 
+                                                        {{ livraison.description }} <br />
+                                                        Prix : {{ livraison.prix }}€
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                            
+                                        
+                                    </div>
+                                </div>                          
+                            </div>
+                        </div>
+                        <div class="right floated six wide column" style="margin-right: 60px;">
+                            <div class="ui segment" style="margin-bottom: 10px; background: #414141;">
+                                <h3 style="text-align: center; center; color: white;">Information de Livraison</h3>
+                            </div>
+                            <div class="ui segment" style="margin-bottom: 10px">
+                                <p> 
+                                    Adresse de livraison : {{ infoLivraison.adresse }} <br />
+                                    Ville :  {{ infoLivraison.ville }} {{ infoLivraison.pays }} <br />
+                                    Code Postal : {{ infoLivraison.codePostal }} <br />
+                                </p>
+                                <div class="ui checkbox">
+                                </div>
+                                <div> 
+                                    <a href="{{ path('livraison', {"choice": 0}) }}"><input class="ui button" type="submit" id="modifier" value="Modifier"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $('.ui.radio.checkbox.modeLivraison').checkbox();
+</script>
+{% endblock %}

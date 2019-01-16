@@ -2,73 +2,78 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PanierRepository")
  */
-class Panier {
+class Panier
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
 
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(name="pan_id", type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="panier", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $panId;
+    private $user;
 
     /**
-     * @var Produits
-     * @ORM\ManyToOne(targetEntity="Produits")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="pro_id", referencedColumnName="pro_id")
-     * })
+     * @ORM\ManyToMany(targetEntity="App\Entity\Produit", inversedBy="paniers")
      */
-    private $proId;
+    private $articles;
+
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_name")
-     * })
+     * @return Collection|Produit[]
      */
-    private $userId;
-
-    /**
-     * @ORM\Column(name="pan_quantite", type="integer")
-     */
-    private $panQuantite;
-
-    function getPanId() {
-        return $this->panId;
+    public function getArticles(): Collection
+    {
+        return $this->articles;
     }
 
-    function getProId() {
-        return $this->proId;
+    public function addArticle(Produit $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+        }
+
+        return $this;
     }
 
-    function getUserId() {
-        return $this->userId;
+    public function removeArticle(Produit $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+        }
+
+        return $this;
     }
 
-    function getPanQuantite() {
-        return $this->panQuantite;
-    }
     
-    function setPanId($panId) {
-        $this->panId = $panId;
-    }
-
-    function setProId($proId) {
-        $this->proId = $proId;
-    }
-
-    function setUserId($userId) {
-        $this->userId = $userId;
-    }
-
-    function setPanQuantite($panQuantite) {
-        $this->panQuantite = $panQuantite;
-    }
 
 }

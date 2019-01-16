@@ -1,6 +1,13 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-controllers:
-    resource: ../src/Controller/
-    type: annotation
+login:
+    path: /login
+    defaults:
+        _controller: OCUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

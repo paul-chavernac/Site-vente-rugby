@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="super_container_inner">
+		<div class="super_overlay"></div>
+
+		<!-- Products -->
+
+		<div class="products">
+			<div class="container">
+				<div class="row" style="margin-top: 8%;">
+					<div class="col-lg-6 offset-lg-3">
+						<div class="section_title text-center">Populaire</div>
+					</div>
+				</div>
+			
+				<div class="row products_row">
+
+					<!-- BDD ALL Products -->
+					{% for produit in produits %}
+					<div class="col-xl-4 col-md-6 grid-item hot">
+							<div class="product">
+									<div>
+										<img src="{{ produit.image }}" alt="" width="350" height="350">
+									</div>
+									<div class="product_content">
+											<div class="product_info d-flex flex-row align-items-start justify-content-start">
+													<div>
+															<div>
+																	<div class="product_name"><a href="{{ path('article',{'id': produit.id}) }}">{{ produit.titre }}</a></div>
+																	<div class="product_category" style="color: black;">{{ produit.description | raw }}</div>
+															</div>
+													</div>
+												<div class="ml-auto text-right">
+														<div class="product_price text-right"><span>{{ produit.prix }} €</span></div>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>		
+					{% endfor %}
+					
+				</div>
+				<div class="row load_more_row">
+					<div class="col">
+						<div class="button load_more ml-auto mr-auto"><a href="{{ path('produit')}}">Voir Tout</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Features -->
+
+		<div class="features">
+			<div class="container">
+				<div class="row">
+					
+					<!-- Feature -->
+					<div class="col-lg-4 feature_col">
+						<div class="feature d-flex flex-row align-items-start justify-content-start">
+							<div class="feature_left">
+								<div class="feature_icon"><img src="{{ asset('assets/images/icon_1.svg') }}" alt=""></div>
+							</div>
+							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
+								<div class="feature_title">Payement Sécurisé</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Feature -->
+					<div class="col-lg-4 feature_col">
+						<div class="feature d-flex flex-row align-items-start justify-content-start">
+							<div class="feature_left">
+								<div class="feature_icon ml-auto mr-auto"><img src="{{ asset('assets/images/icon_2.svg') }}" alt=""></div>
+							</div>
+							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
+								<div class="feature_title">Des Produits à la Mode</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Feature -->
+					<div class="col-lg-4 feature_col">
+						<div class="feature d-flex flex-row align-items-start justify-content-start">
+							<div class="feature_left">
+								<div class="feature_icon"><img src="{{ asset('assets/images/icon_3.svg') }}" alt=""></div>
+							</div>
+							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
+								<div class="feature_title">Livraison Rapide</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+		
+</div>
+    {% endblock %}

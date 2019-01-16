@@ -1,0 +1,19 @@
+easy_admin:
+   design:
+       menu: 
+          #  LINK ICONS : https://fontawesome.com/v4.7.0/icons/
+          - label: "Gestion d'utilisateurs"
+            icon: 'users'
+            children:
+                - { entity: 'User', role: ROLE_SUPER_ADMIN, label: 'Utilisateurs', icon: 'user' }
+          - label: "Gestion d'inventaire"
+            icon: 'shopping-cart'
+            children:
+                - { entity: 'Article', label: 'Produits', icon: 'product-hunt' }
+                - { entity: 'Category', label: 'Catégories', icon: 'tag' }
+          - label: "Gestion des commandes"
+            icon: 'archive'
+            children:
+                - { entity: 'CommandeOrder', label: 'Commandes', icon: 'bar-chart' }
+          - { label: 'Raccourcis' }
+          - { label: 'Retour au site', url: '/', rel: 'index', icon: 'undo' }
