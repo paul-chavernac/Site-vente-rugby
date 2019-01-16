@@ -37,13 +37,14 @@ class BoutiqueController extends AbstractController
     /**
      * @Route("/produit/{idcate}", name="produit")
      */
-    public function produit(Categorie $categorie, ObjectManager $manager){
+    public function produit($idcate = null){
 
         $repo = $this->getDoctrine()->getRepository(Produit::class);
 
-        if(!empty($categorie)){
+        if(!empty($idcate)){
             // TODO charger produit de la categorie
 
+            $categorie = $this->getDoctrine()->getRepository(Categorie::class)->findOneBy(array('id' => $idcate));
             $produits = $repo->findBy(array('categorieProduit' => $categorie));
         } else {
             //TODO charger tous les produits
