@@ -131,6 +131,7 @@ class BoutiqueController extends AbstractController
      */
     public function historique(UserInterface $user, Request $request, ObjectManager $manager)
     {
+        
         $rawSql =   "SELECT * FROM commande_order WHERE user_id = :utilisateur";
         $stmt = $manager->getConnection()->prepare($rawSql);
         $utilisateur = $user->getId();
