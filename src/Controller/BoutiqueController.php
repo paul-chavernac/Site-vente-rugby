@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BoutiqueController extends AbstractController
 {
@@ -23,6 +24,7 @@ class BoutiqueController extends AbstractController
      */
     public function index()
     {
+
         $repo = $this->getDoctrine()->getRepository(Produit::class);
         $produits = $repo->findBy(array(), array('id' => 'DESC'), 3);
 
@@ -31,8 +33,9 @@ class BoutiqueController extends AbstractController
             'controller_name' => 'Boutique',
             'produits' => $produits, 
         ]);
-        
+
     }
+
 
     /**
      * @Route("/produit/{idcate}", name="produit")

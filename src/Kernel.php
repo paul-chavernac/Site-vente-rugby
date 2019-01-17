@@ -8,6 +8,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
@@ -137,4 +138,5 @@ class Kernel extends BaseKernel
             $dotenv->load($p);
         }
     }
+
 }
