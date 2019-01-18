@@ -11,4 +11,4 @@ logout:
 
 inscription:
   path: /inscription
-  defaults: {_controller: registerAction:inscription}
+  defaults: {_controller: App\Controller\ConnexionController::registerAction}

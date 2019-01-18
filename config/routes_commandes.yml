@@ -1,27 +1,27 @@
 panier:
   path: /panier
-  defaults: {_controller: panier:panier}
+  defaults: {_controller: App\Controller\BoutiqueController::panier}
 
 historique:
   path: /historique
-  defaults: {_controller: historique:historique}
+  defaults: {_controller: App\Controller\BoutiqueController::historique}
 
 civil:
   path: /commande/civil
-  defaults: {_controller: index:civil}
+  defaults: {_controller: App\Controller\CommanderController::index}
 
 livraison:
   path: /commande/livraison
-  defaults: {_controller: livraison:livraison}
+  defaults: {_controller: App\Controller\CommanderController::livraison}
 
 payement:
   path: /commande/payement
-  defaults: {_controller: payement:payement}
+  defaults: {_controller: App\Controller\CommanderController::payement}
 
 valider:
   path: /commande/valider
-  defaults: {_controller: valider:valider}
+  defaults: {_controller: App\Controller\CommanderController::valider}
 
 paypal_valider:
   path: /paypal/valider
-  defaults: {_controller: paypal_valider:paypal_valider}
+  defaults: {_controller: App\Controller\PaypalController::paypal_valider}
