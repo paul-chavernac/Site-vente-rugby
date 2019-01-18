@@ -30,6 +30,37 @@ class BoutiqueController extends Controller
         $produits = $repo->findBy(array(), array('id' => 'DESC'), 3);
 
         // Retrieve the entity manager of Doctrine
+
+        
+        return $this->render('boutique/index.html.twig', [
+            'controller_name' => 'Boutique',
+            'produits' => $produits, 
+        ]);
+
+    }
+
+
+    /**
+     * @Route("/produit/{idcate}", name="produit")
+     */
+    public function produit(Request $request, $idcate = null){
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class);
+
+
+        if(!empty($idcate)){
+            // TODO charger produit de la categorie
+
+            $categorie = $this->getDoctrine()->getRepository(Categorie::class)->findOneBy(array('id' => $idcate));
+            $produits = $repo->findBy(array('categorieProduit' => $categorie));
+        } else {
+            //TODO charger tous les produits
+
+            $produits = $repo->findAll();
+        }
+        $repo = $this->getDoctrine()->getRepository(Categorie::class);
+        $categories = $repo->findAll();
+
         $em = $this->getDoctrine()->getManager();
 
         // Get some repository of data, in our case we have an Appointments entity
@@ -37,8 +68,6 @@ class BoutiqueController extends Controller
 
         // Find all the data on the Appointments table, filter your query as you need
         $allAppointmentsQuery = $appointmentsRepository->createQueryBuilder('p')
-            ->where('p.titre != :titre')
-            ->setParameter('titre', 'canceled')
             ->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
@@ -53,44 +82,11 @@ class BoutiqueController extends Controller
             // Items per page
             3
         );
-        return $this->render('boutique/index.html.twig', [
-            'produits' => $produits
-        ]);
-        
-        return $this->render('boutique/index.html.twig', [
-            'controller_name' => 'Boutique',
-            'produits' => $produits, 
-        ]);
-
-    }
-
-
-    /**
-     * @Route("/produit/{idcate}", name="produit")
-     */
-    public function produit($idcate = null){
-
-        $repo = $this->getDoctrine()->getRepository(Produit::class);
-
-        if(!empty($idcate)){
-            // TODO charger produit de la categorie
-
-            $categorie = $this->getDoctrine()->getRepository(Categorie::class)->findOneBy(array('id' => $idcate));
-            $produits = $repo->findBy(array('categorieProduit' => $categorie));
-        } else {
-            //TODO charger tous les produits
-
-            $produits = $repo->findAll();
-        }
-
-        $repo = $this->getDoctrine()->getRepository(Categorie::class);
-        $categories = $repo->findAll();
-
         return $this->render('boutique/produit.html.twig',[
             'controller_name'=> 'Les articles',
             'produits' => $produits,
             'categories'=>$categories,
-            ]);
+        ]);
     }
 
     /**
