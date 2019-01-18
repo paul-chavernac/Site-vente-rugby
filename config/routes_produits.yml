@@ -1,0 +1,12 @@
+boutique:
+  path: /
+  defaults: {_controller: index:boutique}
+
+  produits:
+    path: /produit/{idcate}
+    defaults: {_controller: produit:produits}
+
+  article:
+    path: /article/{id}
+    defaults: {_controller: article:article}
+
