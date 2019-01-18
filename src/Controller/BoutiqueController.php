@@ -18,17 +18,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Controller\DefaultController;
 
-class BoutiqueController extends AbstractController
+class BoutiqueController extends Controller
 {
     /**
      * @Route("/", name="boutique")
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $repo = $this->getDoctrine()->getRepository(Produit::class);
         $produits = $repo->findBy(array(), array('id' => 'DESC'), 3);
 
+        // Retrieve the entity manager of Doctrine
+        $em = $this->getDoctrine()->getManager();
+
+        // Get some repository of data, in our case we have an Appointments entity
+        $appointmentsRepository = $em->getRepository(Produit::class);
+
+        // Find all the data on the Appointments table, filter your query as you need
+        $allAppointmentsQuery = $appointmentsRepository->createQueryBuilder('p')
+            ->where('p.titre != :titre')
+            ->setParameter('titre', 'canceled')
+            ->getQuery();
+
+        /* @var $paginator \Knp\Component\Pager\Paginator */
+        $produits  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $produits = $produits->paginate(
+        // Doctrine Query, not results
+            $allAppointmentsQuery,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            3
+        );
+        return $this->render('boutique/index.html.twig', [
+            'produits' => $produits
+        ]);
         
         return $this->render('boutique/index.html.twig', [
             'controller_name' => 'Boutique',
@@ -54,14 +81,6 @@ class BoutiqueController extends AbstractController
             //TODO charger tous les produits
 
             $produits = $repo->findAll();
-
-            $produit = $this->get('knp_paginator');
-            $pagination = $produit->paginate(
-                $produits,
-                $this->get('request')->query->get('page', 1)/*page number*/,
-    2/*limit per page*/
-            );
-            return $this->render("base.html.twig",array("pagination"=> $pagination));
         }
 
         $repo = $this->getDoctrine()->getRepository(Categorie::class);
@@ -156,7 +175,5 @@ class BoutiqueController extends AbstractController
             'commande' => $commande,
             ]);          
     }
-    public function visiteurController() {
-        return $this->render('visiteur/visiteur.html.twig.twig');
-    }
+
 }

@@ -1,0 +1,24 @@
+{# ./templates/boutique/paginator.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Application</title>
+</head>
+<body>
+<ul>
+    {% for produit in produits %}
+        <li>
+            {{ produit.titre }}
+            {{ produit.description }}
+            {{ produit.image }}
+            {{ produit.prix }}
+        </li>
+    {% endfor %}
+</ul>
+
+<div class="navigation">
+    {{ knp_pagination_render(produits) }}
+</div>
+</body>
+</html>

@@ -45,6 +45,10 @@
 						<div class="button load_more ml-auto mr-auto"><a href="{{ path('produit')}}">Voir Tout</a></div>
 					</div>
 				</div>
+
+				<div class="navigation">
+					{{ knp_pagination_render(produits) }}
+				</div>
 			</div>
 		</div>
 

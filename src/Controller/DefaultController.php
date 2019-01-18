@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Produit;
@@ -14,10 +15,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Get some repository of data, in our case we have an Appointments entity
-        $produitsRepository = $em->getRepository(Produit::class);
+        $produitRepository = $em->getRepository(ProduitRepository::class);
 
         // Find all the data on the Appointments table, filter your query as you need
-        $allProduitsQuery = $produitsRepository->createQueryBuilder('p')
+        $allProduitsQuery = $produitRepository->createQueryBuilder('p')
             ->where('p.status != :status')
             ->setParameter('status', 'canceled')
             ->getQuery();
@@ -36,7 +37,7 @@ class DefaultController extends Controller
         );
 
         // Render the twig view
-        return $this->render('base.html.twig', [
+        return $this->render('boutique/paginator.html.twig', [
             'produits' => $produits
         ]);
     }
