@@ -45,30 +45,39 @@ class BoutiqueController extends Controller
      */
     public function produit(Request $request, $idcate = null){
 
-        $repo = $this->getDoctrine()->getRepository(Produit::class);
+        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
 
 
         if(!empty($idcate)){
             // TODO charger produit de la categorie
 
             $categorie = $this->getDoctrine()->getRepository(Categorie::class)->findOneBy(array('id' => $idcate));
-            $produits = $repo->findBy(array('categorieProduit' => $categorie));
+
+
+            $em = $this->getDoctrine()->getManager();
+
+            // Get some repository of data, in our case we have an Appointments entity
+            $appointmentsRepository = $em->getRepository(Produit::class);
+
+            // Find all the data on the Appointments table, filter your query as you need
+            $allAppointmentsQuery = $appointmentsRepository->createQueryBuilder('p')
+                ->where('p.categorieProduit = :categorie')
+                ->setParameter('categorie', $categorie)
+                ->getQuery();
         } else {
             //TODO charger tous les produits
 
-            $produits = $repo->findAll();
+            $em = $this->getDoctrine()->getManager();
+
+            // Get some repository of data, in our case we have an Appointments entity
+            $appointmentsRepository = $em->getRepository(Produit::class);
+
+            // Find all the data on the Appointments table, filter your query as you need
+            $allAppointmentsQuery = $appointmentsRepository->createQueryBuilder('p')
+                ->getQuery();
         }
-        $repo = $this->getDoctrine()->getRepository(Categorie::class);
-        $categories = $repo->findAll();
 
-        $em = $this->getDoctrine()->getManager();
 
-        // Get some repository of data, in our case we have an Appointments entity
-        $appointmentsRepository = $em->getRepository(Produit::class);
-
-        // Find all the data on the Appointments table, filter your query as you need
-        $allAppointmentsQuery = $appointmentsRepository->createQueryBuilder('p')
-            ->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
         $produits  = $this->get('knp_paginator');
@@ -82,6 +91,7 @@ class BoutiqueController extends Controller
             // Items per page
             3
         );
+
         return $this->render('boutique/produit.html.twig',[
             'controller_name'=> 'Les articles',
             'produits' => $produits,
