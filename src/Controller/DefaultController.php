@@ -36,7 +36,7 @@ class DefaultController extends Controller
         );
 
         // Render the twig view
-        return $this->render('boutique/index.html.twig', [
+        return $this->render('base.html.twig', [
             'produits' => $produits
         ]);
     }

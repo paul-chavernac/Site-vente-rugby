@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Controller\DefaultController;
 
 class BoutiqueController extends AbstractController
 {
@@ -53,6 +54,14 @@ class BoutiqueController extends AbstractController
             //TODO charger tous les produits
 
             $produits = $repo->findAll();
+
+            $produit = $this->get('knp_paginator');
+            $pagination = $produit->paginate(
+                $produits,
+                $this->get('request')->query->get('page', 1)/*page number*/,
+    2/*limit per page*/
+            );
+            return $this->render("base.html.twig",array("pagination"=> $pagination));
         }
 
         $repo = $this->getDoctrine()->getRepository(Categorie::class);

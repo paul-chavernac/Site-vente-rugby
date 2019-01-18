@@ -24,7 +24,27 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Prix</th>
 
+    </tr>
+    {% for produit in pagination %}
+        <tr>
+            <td>{{ produit.id }}</td>
+            <td>{{ produit.titre }}</td>
+            <td>{{ produit.description }}</td>
+            <td>{{ produit.prix }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
 <header class="header">
     <div class="header_overlay"></div>
     <div class="header_content d-flex flex-row align-items-center justify-content-start">
