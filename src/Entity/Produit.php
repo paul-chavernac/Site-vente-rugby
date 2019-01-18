@@ -29,6 +29,11 @@ class Produit
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $prix;
@@ -87,6 +92,24 @@ class Produit
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+
 
     public function getPrix(): ?int
     {
