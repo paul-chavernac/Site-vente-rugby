@@ -15,9 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ConnexionController extends AbstractController
 {
-    /**
-     * @Route("/inscription", name="inscription")
-     */
+
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $manager) {
         // build the form
         $user = new User();

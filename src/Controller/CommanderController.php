@@ -21,9 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CommanderController extends AbstractController
 {
-    /**
-    * @Route("/commande/civil", name="civil")
-    */
+
     public function index(UserInterface $user, Request $request, ObjectManager $manager)
     {
         // verifier que le panier n'est pas vide
@@ -59,9 +57,7 @@ class CommanderController extends AbstractController
         ]); 
     }
 
-    /**
-     * @Route("/commande/livraison/{choice}", name="livraison")
-     */
+
     public function livraison($choice = null, UserInterface $user, Request $request, ObjectManager $manager)
     {
         // verifier que les informations pour acceder a cette page sont bien remplis
@@ -136,9 +132,7 @@ class CommanderController extends AbstractController
         
     }
 
-    /**
-    * @Route("/commande/payement/{choice}", name="payement")
-    */
+
     public function payement($choice = null, UserInterface $user)
     {
 
@@ -190,9 +184,7 @@ class CommanderController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/commande/valider", name="valider")
-     */
+
     public function valider(UserInterface $user, ObjectManager $manager)
     {
         $session = new Session();
@@ -250,9 +242,7 @@ class CommanderController extends AbstractController
         ]);
     }
 
-    /**
-    * @Route("/commande/terminer", name="terminer")
-    */
+
     public function terminer(UserInterface $user)
     {
 

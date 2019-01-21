@@ -2,11 +2,13 @@ boutique:
   path: /
   defaults: {_controller: App\Controller\BoutiqueController::index}
 
-  produits:
+produit:
     path: /produit/{idcate}
-    defaults: {_controller: App\Controller\BoutiqueController::produit}
+    controller: App\Controller\BoutiqueController::produit
+    defaults:
+      idcate: null
 
-  article:
+article:
     path: /article/{id}
     defaults: {_controller: App\Controller\BoutiqueController::article}
 

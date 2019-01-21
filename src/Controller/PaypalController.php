@@ -22,9 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PaypalController extends AbstractController
 {
-    /**
-     * @Route("/paypal/valider", name="paypal_valider")
-     */
+
     public function paypal_valider(UserInterface $user, Request $request, ObjectManager $manager)
     {
 

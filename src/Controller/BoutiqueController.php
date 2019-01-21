@@ -20,9 +20,7 @@ use App\Controller\DefaultController;
 
 class BoutiqueController extends Controller
 {
-    /**
-     * @Route("/", name="boutique")
-     */
+
     public function index(Request $request)
     {
 
@@ -34,22 +32,19 @@ class BoutiqueController extends Controller
         
         return $this->render('boutique/index.html.twig', [
             'controller_name' => 'Boutique',
-            'produits' => $produits, 
+            'produits' => $produits,
         ]);
 
     }
 
 
-    /**
-     * @Route("/produit/{idcate}", name="produit")
-     */
     public function produit(Request $request, $idcate = null){
 
         $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
 
 
         if(!empty($idcate)){
-            // TODO charger produit de la categorie
+            // TODO charger produits de la categorie selectionnée
 
             $categorie = $this->getDoctrine()->getRepository(Categorie::class)->findOneBy(array('id' => $idcate));
 
@@ -99,9 +94,7 @@ class BoutiqueController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/article/{id}", name="article")
-     */
+
     public function article(Produit $article, Request $request, UserInterface $user = null, ObjectManager $manager){
 
         //IF AJAX ADD PANIER
@@ -123,9 +116,7 @@ class BoutiqueController extends Controller
             ]);
     }
 
-    /**
-     * @Route("/panier", name="panier")
-     */
+
     public function panier(UserInterface $user = null, Request $request, ObjectManager $manager)
     {
         if($user == null){
@@ -163,9 +154,7 @@ class BoutiqueController extends Controller
             ]);          
     }
 
-    /**
-     * @Route("/historique", name="historique")
-     */
+
     public function historique(UserInterface $user, Request $request, ObjectManager $manager)
     {
         
