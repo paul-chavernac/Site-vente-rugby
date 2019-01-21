@@ -11,12 +11,16 @@ civil:
   defaults: {_controller: App\Controller\CommanderController::index}
 
 livraison:
-  path: /commande/livraison
-  defaults: {_controller: App\Controller\CommanderController::livraison}
+  path: /commande/livraison/{choice}
+  controller: App\Controller\CommanderController::livraison
+  defaults:
+    choice: null
 
 payement:
-  path: /commande/payement
-  defaults: {_controller: App\Controller\CommanderController::payement}
+  path: /commande/payement/{choice}
+  controller: App\Controller\CommanderController::payement
+  defaults:
+    choice: null
 
 valider:
   path: /commande/valider
