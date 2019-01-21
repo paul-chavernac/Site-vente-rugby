@@ -57,7 +57,7 @@
                                     {% set totalPrix = totalPrix + article.prix %}
                                     <div style="text-align: center; padding-bottom: 5%;">
                                         <div>
-                                            <img src="{{ article.image }}" alt="" width="40%" height="40%">
+                                            <img src="{{ asset(article.ImagePrincipale.image) }}" alt="IMG-PRODUCT" width="40%" height="40%">
                                         </div>
                                         <div>
                                             <p>{{ article.titre }}</p>
