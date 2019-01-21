@@ -11,3 +11,15 @@ easy_admin:
         date:     'd/m/Y'
         time:     'H:i'
         datetime: 'd/m/Y à H:i'
+
+   entities:
+     Image:
+       list:
+         fields:
+           - { property: 'image', type: 'image', base_path: '%app.path.assets/images%' }
+       show:
+         fields:
+           - { property: 'image', type: 'image', base_path: '%app.path.assets/images%' }
+       form:
+         fields:
+           - { property: 'imageFile', type: 'vich_image' }

@@ -1,3 +1,6 @@
-# config/packages/vich_uploader.yaml
 vich_uploader:
   db_driver: orm
+  mappings:
+    image_images:
+      uri_prefix:         '%app.path.assets/images%'
+      upload_destination: '%kernel.project_dir%/public%app.path.image_images%'

@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ConnexionController extends AbstractController
 {
-
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $manager) {
         // build the form
         $user = new User();

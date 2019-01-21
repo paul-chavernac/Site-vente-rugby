@@ -34,6 +34,11 @@ class Produit
     private $images;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image")
+     */
+    private $imagePrincipale;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $prix;
@@ -181,6 +186,18 @@ class Produit
     public function setImages(?Image $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getImagePrincipale(): ?Image
+    {
+        return $this->imagePrincipale;
+    }
+
+    public function setImagePrincipale(?Image $imagePrincipale): self
+    {
+        $this->imagePrincipale = $imagePrincipale;
 
         return $this;
     }
