@@ -3,4 +3,4 @@ vich_uploader:
   mappings:
     image_images:
       uri_prefix:         '%app.path.assets/images%'
-      upload_destination: '%kernel.project_dir%/public%app.path.image_images%'
+      upload_destination: '%kernel.project_dir%/public%app.path.assets/images%'

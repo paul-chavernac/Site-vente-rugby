@@ -14,6 +14,7 @@ easy_admin:
 
    entities:
      Image:
+       class: App\Entity\Image
        list:
          fields:
            - { property: 'image', type: 'image', base_path: '%app.path.assets/images%' }
@@ -22,4 +23,4 @@ easy_admin:
            - { property: 'image', type: 'image', base_path: '%app.path.assets/images%' }
        form:
          fields:
-           - { property: 'imageFile', type: 'vich_image' }
+           - { property: 'imageFile', type: 'file' }
