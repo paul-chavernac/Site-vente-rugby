@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Sell - {{ controller_name }}{% endblock %}
 {% block body %}
+<link rel="stylesheet" type="text/css" href="vendor/{{ asset('assets/plugins/flexslider/flexslider.css') }}">
 
 <div class="super_container">
 
@@ -13,14 +14,28 @@
 		<div class="product">
 			<div class="container">
 				<div class="row">
-					
 					<!-- Product Image -->
 					<div class="col-lg-6">
 						<div class="product_image_slider_container">
 							<div id="slider" class="flexslider">
-                                <img src="{{ asset(article.ImagePrincipale.image) }}" alt=" " width="350" height="350">
-                                <img src="{{ asset(article.Images.image) }}" alt="" width="70" height="70">
+<div class="container bgwhite p-t-35 p-b-80">
+		<div class="flex-w flex-sb">
+			<div class="w-size13 p-t-30 respon5">
+				<div class="wrap-slick3 flex-sb flex-w">
+					<div class="wrap-slick3-dots"></div>
+					<div class="slick3">
+							<div class="wrap-pic-w">
+								<img src="{{ asset(article.ImagePrincipale.image) }}" alt="IMG-PRODUCT" width="350" height="350">
+							</div>
+						</div>
+							<div class="wrap-pic-w">
+								<img src="{{ asset(article.Images.image) }}" alt="IMG-PRODUCT" width="150" height="150">
+							</div>
 
+						</div>
+					</div>
+				</div>
+			</div>
 
                             </div>
 						</div>
@@ -42,6 +57,22 @@
 									<i class="shop icon"></i>
 								</div>
 							</div>
+								<div class="p-t-33 p-b-60">
+					<div class="flex-m flex-w p-b-10">
+						<div class="s-text15 w-size15 t-center">
+							Size
+						</div>
+
+						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+							<select class="selection-2" name="size">
+								<option>Choose an option</option>
+								<option>Size S</option>
+								<option>Size M</option>
+								<option>Size L</option>
+								<option>Size XL</option>
+							</select>
+						</div>
+					</div>
 							{% else %}
 							<a href="{{ path('fos_user_security_login') }}">
 								<div class="ui vertical animated button" tabindex="0">
@@ -51,6 +82,7 @@
 									</div>
 								</div>
 							</a>
+
 							{% endif %}
 						</div>
 					</div>
