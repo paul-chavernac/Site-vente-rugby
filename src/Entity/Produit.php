@@ -29,9 +29,9 @@ class Produit
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image")
      */
-    private $image;
+    private $images;
 
     /**
      * @ORM\Column(type="integer")
@@ -92,24 +92,6 @@ class Produit
 
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-
 
     public function getPrix(): ?int
     {
@@ -187,6 +169,18 @@ class Produit
             $this->paniers->removeElement($panier);
             $panier->removeArticle($this);
         }
+
+        return $this;
+    }
+
+    public function getImages(): ?Image
+    {
+        return $this->images;
+    }
+
+    public function setImages(?Image $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }
