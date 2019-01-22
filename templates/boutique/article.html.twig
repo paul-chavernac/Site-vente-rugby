@@ -13,31 +13,40 @@
 
 		<div class="product">
 			<div class="container">
-				<div class="row">
-					<!-- Product Image -->
-					<div class="col-lg-6">
-						<div class="product_image_slider_container">
-							<div id="slider" class="flexslider">
-<div class="container bgwhite p-t-35 p-b-80">
-		<div class="flex-w flex-sb">
-			<div class="w-size13 p-t-30 respon5">
-				<div class="wrap-slick3 flex-sb flex-w">
-					<div class="wrap-slick3-dots"></div>
-					<div class="slick3">
-							<div class="wrap-pic-w">
-										<img src="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}" alt="{{ article.imagePrincipale.alt }}" width="350" height="350">
+				<!-- Product Image -->
+				<div class="col-lg-6">
+					<div class="product_image_slider_container">
+						<div id="slider" class="flexslider">
+							<div class="container bgwhite p-t-35 p-b-80">
+								<div class="flex-w flex-sb">
+									<div class="w-size13 p-t-30 respon5">
+										<div class="wrap-slick3 flex-sb flex-w">
+											<div class="wrap-slick3-dots"></div>
+											<div class="slick3">
+												<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}">
+													<div class="wrap-pic-w">
+														<img src="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}" alt="{{ article.imagePrincipale.alt }}">
+													</div>
+												</div>
+													{% for image in article.images %}
+													<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(image, 'imageFile')) }}">
+														<div class="wrap-pic-w">
+															<img src="{{ asset(vich_uploader_asset(image, 'imageFile')) }}" alt="{{ image.alt }}">
+														</div>
+													</div>
+													{%  endfor %}
+											</div>
+										</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-
-
 						</div>
 					</div>
 				</div>
 			</div>
-
-                            </div>
-						</div>
-					</div>
+			</div>
 
 					<!-- Product Info -->
 					<div class="col-lg-6 product_col">

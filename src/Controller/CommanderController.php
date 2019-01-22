@@ -257,7 +257,7 @@ class CommanderController extends AbstractController
             return $this->redirectToRoute('panier');
         }
         
-        return $this->render('commander/finish.html.twig', [
+        return $this->render('commander/fini!sh.html.twig', [
             'controller_name' => 'Terminé',
             'title' => 'Commander',
         ]);

@@ -95,7 +95,7 @@ class BoutiqueController extends Controller
     }
 
 
-    public function article(Produit $article, Request $request, UserInterface $user = null, ObjectManager $manager){
+    public function article(Produit $article, Produit $articles, Request $request, UserInterface $user = null, ObjectManager $manager){
 
         //IF AJAX ADD PANIER
         if($request->isXmlHttpRequest()){
@@ -113,6 +113,7 @@ class BoutiqueController extends Controller
         return $this->render('boutique/article.html.twig',[
             'controller_name'=> 'Un article',
             'article' => $article,
+            'articles' => $articles,
             ]);
     }
 
