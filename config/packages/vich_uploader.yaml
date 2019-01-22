@@ -1,6 +1,10 @@
 vich_uploader:
   db_driver: orm
   mappings:
-    image_images:
-      uri_prefix:         '%app.path.assets/images%'
-      upload_destination: '%kernel.project_dir%/public%app.path.assets/images%'
+    image_produits:
+      uri_prefix:         'assets/images/produits'
+      upload_destination: '%kernel.project_dir%/public/assets/images/produits'
+
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true

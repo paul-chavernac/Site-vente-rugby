@@ -31,7 +31,7 @@ class Image
     private $updatedAt;
 
     /**
-     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="image_produits", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
@@ -40,6 +40,12 @@ class Image
      * @ORM\Column(type="string")
      */
     private $alt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="images", cascade={"all"})
+     * @ORM\JoinColumn(name="produit_id", nullable=false)
+     */
+    private $produit;
 
     /**
      * @return mixed
@@ -121,6 +127,18 @@ class Image
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
+
+        return $this;
     }
     
 

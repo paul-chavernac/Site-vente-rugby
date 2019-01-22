@@ -29,12 +29,13 @@ class Produit
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Image")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="produit", cascade={"all"})
      */
     private $images;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image")
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"all"})
+     * @ORM\JoinColumn(name="image_principale_id", nullable=false)
      */
     private $imagePrincipale;
 
@@ -63,6 +64,7 @@ class Produit
         $this->userId = new ArrayCollection();
         $this->commandeOrders = new ArrayCollection();
         $this->paniers = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function __toString() {
@@ -178,17 +180,7 @@ class Produit
         return $this;
     }
 
-    public function getImages(): ?Image
-    {
-        return $this->images;
-    }
 
-    public function setImages(?Image $images): self
-    {
-        $this->images = $images;
-
-        return $this;
-    }
 
     public function getImagePrincipale(): ?Image
     {
@@ -200,6 +192,37 @@ class Produit
         $this->imagePrincipale = $imagePrincipale;
 
         return $this;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProduit() === $this) {
+                $image->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
     }
 
   

@@ -51,7 +51,7 @@
 									<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-end justify-content-start">
 										<div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto">
 											<div><div class="product_number">1</div></div>
-											<div><div class="product_image"><img src="{{ asset(article.getImagePrincipale.image) }}" alt=""></div></div>
+											<div><div class="product_image"><img src="{{ vich_uploader_asset(article.getImagePrincipale, 'imageFile') }}" alt="{{ article.imagePrincipale.alt }}"></div></div>
 											
 											<div class="product_name" style="margin-left: 80px;"><a href="path('article',{'id': produit.id})">{{ article.titre }}</a></div>
 											<div class="product_text" style="margin-left: 40px;">{{ article.description | raw }}</div>

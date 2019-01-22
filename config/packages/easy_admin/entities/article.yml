@@ -11,6 +11,8 @@ easy_admin:
                   - { property: 'description', label: 'Description' }
                   - { property: 'categorieProduit', label: 'Catégorie',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Categorie' } }
                   - { property: 'prix', label: 'Prix', type: 'money', type_options: { currency: 'EUR' } }
+                  - { property: 'imagePrincipale', label: 'Image Principale', type: 'App\Form\ImageType', type_options: { by_reference: false}}
+                  - { property: 'images', label: 'Autres Images', type: 'collection', type_options: {entry_type: 'App\Form\ImageType', by_reference: false, required: false}}
           list:
               sort: ['id', 'DESC']
               title: "Liste des %%entity_label%%"

@@ -57,7 +57,8 @@
                                     {% set totalPrix = totalPrix + article.prix %}
                                     <div style="text-align: center; padding-bottom: 5%;">
                                         <div>
-                                            <img src="{{ asset(article.ImagePrincipale.image) }}" alt="IMG-PRODUCT" width="40%" height="40%">
+                                            <img src="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}" alt="{{ article.imagePrincipale.alt }}" width="40%" height="40%">
+
                                         </div>
                                         <div>
                                             <p>{{ article.titre }}</p>
