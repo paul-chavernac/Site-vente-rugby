@@ -2,35 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="fr-FR">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Boutique !{% endblock %}</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/bootstrap-4.1.2/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/semantic/semantic.min.css') }}">
-    <!-- Template -->
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/fonts/themify/themify-icons.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/fonts/elegant-font/html-css/style.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/slick/slick.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/util.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
-    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/themify/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/elegant-font/html-css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/animate/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/animsition/css/animsition.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/select2/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/slick/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
@@ -56,7 +42,7 @@
         <div class="logo">
             <a>
                 <div class="d-flex flex-row align-items-center justify-content-start">
-                    <div>Rugby Shop</div>
+
                 </div>
             </a>
         </div>
@@ -79,7 +65,7 @@
                             <li><a href="/admin">Administration</a></li>
                         {% endif %}
                     {% endif %}
-
+                    <li> <a href="{{ path('contact') }}">Contact</a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li> <a href="{{ path('historique') }}">Mes commandes</a></li>
                         <li> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
@@ -88,6 +74,8 @@
                         <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
                     {% endif %}
                     <li><a href="{{ path('panier') }}"><i class='fa fa-shopping-cart' style='font-size:36px'></i></a></li>
+
+
                 </ul>
             </nav>
         </div>
@@ -137,7 +125,7 @@
                                 <a href="#"><div>Terms and Conditions</div></a>
                             </li>
                             <li>
-                                <a href="#"><div>Contact</div></a>
+                                <a href="{{ path('contact') }}"><div>Contact</div></a>
                             </li>
                         </ul>
                     </div>
@@ -162,6 +150,14 @@
 
 <!-- Scripts -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('assets/animsition/js/animsition.min.js') }}"></script>
+<script src="{{ asset('assets/bootstrap/js/popper.js') }}"></script>
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/select2/select2.min.js') }}"></script>
+<script src="{{ asset('assets/slick/slick.min.js') }}"></script>
+<script src="{{ asset('assets/js/slick-custom.js') }}"></script>
+<script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/js/skel.min.js') }}"></script>
 <script src="{{ asset('assets/js/util.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -169,24 +165,12 @@
 <script src="{{ asset('assets/js/slick-custom.min.js') }}"></script>
 
 <!-- Template script -->
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/bootstrap/js/popper.js"></script>
-<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/slick/slick.min.js"></script>
-<script type="text/javascript" src="../assets/js/slick-custom.js"></script>
-<!--===============================================================================================-->
-<script type="text/javascript" src="../assets/sweetalert/sweetalert.min.js"></script>
+
 <script src="{{ asset('assets/styles/bootstrap-4.1.2/popper.js') }}"></script>
 <script src="{{ asset('assets/styles/bootstrap-4.1.2/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/greensock/TweenMax.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('assets/js/map-custom.js') }}"></script>
 <script src="{{ asset('assets/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/greensock/animation.gsap.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
@@ -207,7 +191,6 @@
         crossorigin="anonymous"></script>
 <script src="{{ asset('assets/semantic/semantic.min.js') }}"></script>
 <!--===============================================================================================-->
-<script src="../assets/js/main.js"></script>
 {% block footer %}{% endblock %}
 
 {% block javascripts %}{% endblock %}

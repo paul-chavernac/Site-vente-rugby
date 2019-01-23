@@ -94,6 +94,10 @@ class BoutiqueController extends Controller
         ]);
     }
 
+    public function contact()
+    {
+        return $this->render('boutique/contact.html.twig');
+    }
 
     public function article(Produit $article, Produit $articles, Request $request, UserInterface $user = null, ObjectManager $manager){
 
