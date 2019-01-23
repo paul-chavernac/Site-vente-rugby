@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Sell - {{ controller_name }}{% endblock %}
 {% block body %}
-<link rel="stylesheet" type="text/css" href="vendor/{{ asset('assets/plugins/flexslider/flexslider.css') }}">
+<link rel="stylesheet" type="text/css" href="../public{{ asset('assets/plugins/flexslider/flexslider.css') }}">
 
 <div class="super_container">
 
@@ -10,46 +10,35 @@
 
 		
 		<!-- Product -->
+		<div class="col-md-6">
+		<div class="text-left">
+		<div class="container bgwhite p-t-35 p-b-80">
+			<div class="flex-w flex-sb">
+				<div class="w-size13 p-t-30 respon5">
+					<div class="wrap-slick3 flex-sb flex-w">
+						<div class="wrap-slick3-dots"></div>
 
-		<div class="product">
-			<div class="container">
-				<!-- Product Image -->
-				<div class="col-lg-6">
-					<div class="product_image_slider_container">
-						<div id="slider" class="flexslider">
-							<div class="container bgwhite p-t-35 p-b-80">
-								<div class="flex-w flex-sb">
-									<div class="w-size13 p-t-30 respon5">
-										<div class="wrap-slick3 flex-sb flex-w">
-											<div class="wrap-slick3-dots"></div>
-											<div class="slick3">
-												<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}">
-													<div class="wrap-pic-w">
-														<img src="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}" alt="{{ article.imagePrincipale.alt }}">
-													</div>
-												</div>
-													{% for image in article.images %}
-													<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(image, 'imageFile')) }}">
-														<div class="wrap-pic-w">
-															<img src="{{ asset(vich_uploader_asset(image, 'imageFile')) }}" alt="{{ image.alt }}">
-														</div>
-													</div>
-													{%  endfor %}
-											</div>
-										</div>
-											</div>
-										</div>
-									</div>
+						<div class="slick3">
+							<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}">
+								<div class="wrap-pic-w">
+									<img class="img-responsive center-block" src="{{ asset(vich_uploader_asset(article.imagePrincipale, 'imageFile')) }}" alt="{{ article.imagePrincipale.alt }}" width="350" height="350">
 								</div>
 							</div>
+							{% for image in article.images %}
+							<div class="item-slick3" data-thumb="{{ asset(vich_uploader_asset(image, 'imageFile')) }} ">
+								<div class="wrap-pic-w">
+									<img src="{{ asset(vich_uploader_asset(image, 'imageFile')) }}" alt="{{ image.alt }}" >
+								</div>
+							</div>
+							{%  endfor %}
 						</div>
 					</div>
 				</div>
 			</div>
 			</div>
-
+		</div>
+		</div>
 					<!-- Product Info -->
-					<div class="col-lg-6 product_col">
 						<div class="product_info">
 							<div class="product_name">{{ article.titre }}</div>
 							<div class="product_price"><span>{{ article.prix}} €</span></div>
@@ -98,7 +87,7 @@
 			</div>
 		</div>
 
-
+</div>
 	</div>
 		
 </div>
