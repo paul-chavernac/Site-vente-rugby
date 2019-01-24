@@ -25,7 +25,7 @@ class BoutiqueController extends Controller
     {
 
         $repo = $this->getDoctrine()->getRepository(Produit::class);
-        $produits = $repo->findBy(array(), array('id' => 'DESC'), 3);
+        $produits = $repo->findBy(array(), array('id' => 'DESC'), 6);
 
         // Retrieve the entity manager of Doctrine
 
@@ -84,7 +84,7 @@ class BoutiqueController extends Controller
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
-            3
+            6
         );
 
         return $this->render('boutique/produit.html.twig',[
@@ -99,7 +99,7 @@ class BoutiqueController extends Controller
         return $this->render('boutique/contact.html.twig');
     }
 
-    public function article(Produit $article, Produit $articles, Request $request, UserInterface $user = null, ObjectManager $manager){
+    public function article(Produit $article, Produit $articles, Produit $articlesPAnier, Request $request, UserInterface $user = null, ObjectManager $manager){
 
         //IF AJAX ADD PANIER
         if($request->isXmlHttpRequest()){
@@ -118,6 +118,7 @@ class BoutiqueController extends Controller
             'controller_name'=> 'Un article',
             'article' => $article,
             'articles' => $articles,
+            'articlesPanier' => $articlesPAnier,
             ]);
     }
 
