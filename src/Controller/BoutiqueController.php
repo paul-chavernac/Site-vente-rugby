@@ -94,6 +94,26 @@ class BoutiqueController extends Controller
         ]);
     }
 
+    public function envoiMail()
+    {
+        // Create the Transport
+        $transport = new Swift_SendmailTransport('/usr/sbin/sendmail -bs');
+
+// Create the Mailer using your created Transport
+        $mailer = new Swift_Mailer($transport);
+
+// Create a message
+        $message = (new Swift_Message('Wonderful Subject'))
+            ->setFrom(['john@doe.com' => 'John Doe'])
+            ->setTo(['receiver@domain.org', 'other@domain.org' => 'A name'])
+            ->setBody('Here is the message itself')
+        ;
+
+// Send the message
+        $result = $mailer->send($message);
+
+    }
+
     public function contact()
     {
         return $this->render('boutique/contact.html.twig');
