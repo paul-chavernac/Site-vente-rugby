@@ -99,7 +99,7 @@ class BoutiqueController extends Controller
         return $this->render('boutique/contact.html.twig');
     }
 
-    public function article(Produit $article, Produit $articles, Produit $articlesPAnier, Request $request, UserInterface $user = null, ObjectManager $manager){
+    public function article(Produit $article, Produit $nbArticle, Produit $articles, Produit $articlesPAnier, Request $request, UserInterface $user = null, ObjectManager $manager){
 
         //IF AJAX ADD PANIER
         if($request->isXmlHttpRequest()){
@@ -119,7 +119,9 @@ class BoutiqueController extends Controller
             'article' => $article,
             'articles' => $articles,
             'articlesPanier' => $articlesPAnier,
-            ]);
+            'nbArticle' => $nbArticle,
+
+        ]);
     }
 
 

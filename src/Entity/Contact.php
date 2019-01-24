@@ -38,85 +38,60 @@ class Contact
      */
     private $message;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNom()
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNum()
+    public function getNum(): ?string
     {
         return $this->num;
     }
 
-    /**
-     * @param mixed $num
-     */
-    public function setNum($num): void
+    public function setNum(string $num): self
     {
         $this->num = $num;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
-    /**
-     * @param mixed $message
-     */
-    public function setMessage($message): void
+    public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
     }
+
+
 
 
 

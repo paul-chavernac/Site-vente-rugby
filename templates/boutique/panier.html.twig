@@ -53,8 +53,7 @@
 											<div><div class="product_number">1</div></div>
 											<div><div class="product_image"><img src="{{ vich_uploader_asset(article.getImagePrincipale, 'imageFile') }}" alt="{{ article.imagePrincipale.alt }}"></div></div>
 
-											<div class="product_name" style="margin-left: 80px;"><a href="path('article',{'id': produit.id})">{{ article.titre }}</a></div>
-											<div class="product_text" style="margin-left: 40px;">{{ article.description | raw }}</div>
+											<div  style="margin-left: 80px;"><a>{{ article.titre }}</a></div>
 
 										</div>
 										<div class="product_quantity_container">
@@ -79,10 +78,15 @@
 								<div class="cart_extra_title">Panier</div>
 								<ul class="cart_extra_total_list">
 									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_extra_total_title">Nombre d'article(s)</div>
+										<div class="cart_extra_total_value ml-auto">{{ nbArticle }}</div>
+									</li>
+									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Total du Panier</div>
 										<div class="cart_extra_total_value ml-auto">{{ totalPrix }}€</div>
 									</li>
-								{% if nbArticle < 1 %}
+
+									{% if nbArticle < 1 %}
 								<div class="checkout_button trans_200"><a href="{{ path('produit') }}">Commander</a></div>
 								{% else %}
 								<div class="checkout_button trans_200"><a href="{{ path('civil') }}">Commander</a></div>
