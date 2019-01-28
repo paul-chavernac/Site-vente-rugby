@@ -15,5 +15,5 @@ easy_admin:
             icon: 'archive'
             children:
                 - { entity: 'CommandeOrder', label: 'Commandes', icon: 'bar-chart' }
-          - { label: 'Raccourcis' }
+          - { label: 'Aller sur le Site' }
           - { label: 'Retour au site', url: '/', rel: 'index', icon: 'undo' }
