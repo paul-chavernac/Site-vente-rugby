@@ -35,6 +35,7 @@ class Categorie
     
     public function __toString()
     {
+        return (string) "Categories";
         return $this->getLibelle();
     }
 

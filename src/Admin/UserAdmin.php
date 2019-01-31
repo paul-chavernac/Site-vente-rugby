@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class UserAdmin extends AbstractAdmin
@@ -17,7 +18,8 @@ final class UserAdmin extends AbstractAdmin
         $formMapper->add('username', TextType::class);
         $formMapper->add('password', TextType::class);
         $formMapper->add('email', TextType::class);
-
+        $CategFieldOptions = [];
+        $formMapper->add('roles', ModelListType::class, $CategFieldOptions);
 
     }
 
@@ -27,7 +29,7 @@ final class UserAdmin extends AbstractAdmin
         $datagridMapper->add('username');
         $datagridMapper->add('password');
         $datagridMapper->add('email');
-
+        $datagridMapper->add('roles');
 
     }
 
@@ -37,7 +39,7 @@ final class UserAdmin extends AbstractAdmin
         $listMapper->addIdentifier('username');
         $listMapper->addIdentifier('password');
         $listMapper->addIdentifier('email');
-
+        $listMapper->addIdentifier('roles');
 
     }
 }

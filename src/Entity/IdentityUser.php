@@ -109,4 +109,5 @@ class IdentityUser
 
         return $this;
     }
+
 }
