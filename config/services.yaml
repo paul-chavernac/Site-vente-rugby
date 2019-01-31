@@ -4,10 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    sonata.admin.security.mask.builder.class: Sonata\AdminBundle\Security\Acl\Permission\MaskBuilder
     app.path.image_produits: /uploads/assets/images/produits
     locale: 'fr'
 
 services:
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -16,13 +18,34 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Utilisateurs }
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+
+    admin.produit:
+        class: App\Admin\ProduitAdmin
+        arguments: [~, App\Entity\Produit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Produits }
+
     admin.category:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\Categorie, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Category }
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+            - { name: sonata.admin, manager_type: orm, label: Categories }
+
+
+        # makes classes in src/ available to be used as services
+        # this creates a service per class whose id is the fully-qualified class name
+
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'

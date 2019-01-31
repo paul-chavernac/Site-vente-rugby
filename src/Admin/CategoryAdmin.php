@@ -12,16 +12,16 @@ final class CategoryAdmin extends AbstractAdmin
 {
 protected function configureFormFields(FormMapper $formMapper)
 {
-$formMapper->add('name', TextType::class);
+$formMapper->add('libelle', TextType::class);
 }
 
 protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 {
-$datagridMapper->add('name');
+$datagridMapper->add('libelle');
 }
 
 protected function configureListFields(ListMapper $listMapper)
 {
-$listMapper->addIdentifier('name');
+$listMapper->addIdentifier('libelle');
 }
 }

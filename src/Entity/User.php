@@ -32,7 +32,6 @@ class User extends BaseUser
      * @ORM\OneToOne(targetEntity="App\Entity\LivraisonUser", mappedBy="user", cascade={"persist", "remove"})
      */
     private $livraisonUser;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CommandeOrder", mappedBy="user")
      */
@@ -40,7 +39,7 @@ class User extends BaseUser
 
     public function __construct()
     {
-    parent::__construct();
+        parent::__construct();
     $this->commandeOrders = new ArrayCollection();
     $this->paniers = new ArrayCollection();
     // your own logic
@@ -126,5 +125,10 @@ class User extends BaseUser
             }
         }
         return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }

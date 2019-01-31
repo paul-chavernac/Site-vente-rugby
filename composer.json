@@ -13,6 +13,7 @@
         "sonata-project/admin-bundle": "^3.45",
         "sonata-project/doctrine-orm-admin-bundle": "^3.8",
         "swiftmailer/swiftmailer": "^6.0",
+        "symfony/acl-bundle": "^1.0",
         "symfony/asset": "4.1.*",
         "symfony/console": "4.1.*",
         "symfony/expression-language": "4.1.*",
