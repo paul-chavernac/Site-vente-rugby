@@ -185,18 +185,17 @@ class BoutiqueController extends Controller
 
     public function historique(UserInterface $user, Request $request, ObjectManager $manager)
     {
-        
         $rawSql =   "SELECT * FROM commande_order WHERE user_id = :utilisateur";
         $stmt = $manager->getConnection()->prepare($rawSql);
         $utilisateur = $user->getId();
         $stmt->bindValue('utilisateur', $utilisateur);
         $stmt->execute();
         $commande = $stmt->fetchAll();
-        
+
         return $this->render('boutique/historique.html.twig', [
             'controller_name' => 'Mes achats',
             'commande' => $commande,
-            ]);          
+        ]);
     }
 
 }

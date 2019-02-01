@@ -3,7 +3,19 @@
     Paiement
 {% endblock titrecompte %}
 {% block body %}
-    <div class="row justify-content-center col-11 "><h2>Paiement</h2></div>
+    <div class="home">
+        <div class="home_container d-flex flex-column align-items-center justify-content-end">
+            <div class="home_content text-center">
+                <div class="home_title">Paiement</div>
+                <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
+                    <ul class="d-flex flex-row align-items-start justify-content-start text-center">
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="{{ path('paypal_valider') }}">Paiement de la commande</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container" style="margin-top: 100px;">
     <div class="row justify-content-center col-11">
     <div id="paypal-button"></div>

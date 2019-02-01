@@ -2,27 +2,27 @@
 {% block title %}Sell - {{ controller_name }}{% endblock %}
 {% block body %}
 
-<div class="super_container">
+	<div class="super_container">
 
-	<div class="super_container_inner">
-		<div class="super_overlay"></div>
+		<div class="super_container_inner">
+			<div class="super_overlay"></div>
 
-		<!-- Home -->
+			<!-- Home -->
 
-		<div class="home">
-			<div class="home_container d-flex flex-column align-items-center justify-content-end">
-				<div class="home_content text-center">
-					<div class="home_title">Mes commandes</div>
+			<div class="home">
+				<div class="home_container d-flex flex-column align-items-center justify-content-end">
+					<div class="home_content text-center">
+						<div class="home_title">Mes commandes</div>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="cart_section">
-			<div class="container">
-				
-				<div>
-					<table class="table-client">
-						<tbody>
+			<div class="cart_section">
+				<div class="container">
+
+					<div>
+						<table class="table-client">
+							<tbody>
 							<tr >
 								<th>Numéro de commande</th>
 								<th>Date de commande</th>
@@ -30,23 +30,23 @@
 								<th>Détails</th>
 							</tr>
 							{% for cmd in commande %}
-							<tr>
-								<td>{{ cmd.reference }}</td>
-								<td>{{ cmd.date }}</td>
-								<td>
-									<div>{{ cmd.status }}</div>
-								</td>
-								<td><a href=""><i class="search icon"></i></a></td>
-							</tr>
+								<tr>
+									<td>{{ cmd.reference }}</td>
+									<td>{{ cmd.date }}</td>
+									<td>
+										<div>{{ cmd.status }}</div>
+									</td>
+									<td><a href=""><i class="search icon"></i></a></td>
+								</tr>
 							{% endfor %}
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
+
 				</div>
-
 			</div>
-		</div>
 
-	</div>	
-</div>
+		</div>
+	</div>
 
 {% endblock %}
