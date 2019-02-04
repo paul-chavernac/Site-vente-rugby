@@ -18,46 +18,69 @@
     </div>
     <div class="container" style="margin-top: 100px;">
     <div class="row justify-content-center col-11">
-    <div id="paypal-button"></div>
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <script>
-        paypal.Button.render({
-            // Configure environment
-            env: 'sandbox',
-            client: {
-                sandbox: 'demo_sandbox_client_id',
-                production: 'demo_production_client_id'
-            },
-            // Customize button (optional)
-            locale: 'en_US',
-            style: {
-                size: 'large',
-                color: 'gold',
-                shape: 'pill',
-            },
-            // Enable Pay Now checkout flow (optional)
-            commit: true,
-            // Set up a payment
-            payment: function (data, actions) {
-                return actions.payment.create({
-                    transactions: [{
-                        amount: {
-                            total: 'XXX',
-                            currency: 'EUR'
-                        }
-                    }]
-                });
-            },
-            // Execute the payment
-            onAuthorize: function (data, actions) {
-                return actions.payment.execute().then(function () {
-                    // Show a confirmation message to the buyer
-                    window.alert('Paiement Effectué!');
+        <div id="paypal-button-container"></div>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script>
+            // Render the PayPal button
+            paypal.Button.render({
+// Set your environment
+                env: 'sandbox', // sandbox | production
 
-                });
-            }
-        }, '#paypal-button');
-    </script>
-</div>
-</div>
+// Specify the style of the button
+                style: {
+                    layout: 'vertical',  // horizontal | vertical
+                    size:   'large',    // medium | large | responsive
+                    shape:  'pill',      // pill | rect
+                    color:  'gold'       // gold | blue | silver | white | black
+                },
+
+// Specify allowed and disallowed funding sources
+//
+// Options:
+// - paypal.FUNDING.CARD
+// - paypal.FUNDING.CREDIT
+// - paypal.FUNDING.ELV
+                funding: {
+                    allowed: [
+                        paypal.FUNDING.CARD,
+                        paypal.FUNDING.CREDIT
+                    ],
+                    disallowed: []
+                },
+
+// Enable Pay Now checkout flow (optional)
+                commit: true,
+
+// PayPal Client IDs - replace with your own
+// Create a PayPal app: https://developer.paypal.com/developer/applications/create
+                client: {
+                    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                    production: '<insert production client id>'
+                },
+
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: {
+                                        total: '0.01',
+                                        currency: 'USD'
+                                    }
+                                }
+                            ]
+                        }
+                    });
+                },
+
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute()
+                        .then(function () {
+                            window.alert('Paiement Effectué!');
+                        });
+                }
+            }, '#paypal-button-container');
+        </script>
+    </div>
+    </div>
 {% endblock body %}
