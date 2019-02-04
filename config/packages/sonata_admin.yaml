@@ -4,10 +4,6 @@ sonata_admin:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
             - { type: sonata.admin.block.search_result, position: left }
-    security:
-        role_admin: ROLE_ADMIN
-        role_super_admin: ROLE_SUPER_ADMIN
-
 sonata_block:
     blocks:
         sonata.admin.block.search_result:

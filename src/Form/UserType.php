@@ -1,6 +1,7 @@
 <?php
 namespace App\Form;
 
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
