@@ -15,10 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Controller\DefaultController;
 
-class BoutiqueController extends Controller
+
+class BoutiqueController extends AbstractController
 {
 
     public function index(Request $request)
@@ -187,7 +186,7 @@ class BoutiqueController extends Controller
     {
         $rawSql =   "SELECT * FROM commande_order WHERE user_id = :utilisateur";
         $stmt = $manager->getConnection()->prepare($rawSql);
-        $utilisateur = $user->getId();
+        $utilisateur = $user->getUsername();
         $stmt->bindValue('utilisateur', $utilisateur);
         $stmt->execute();
         $commande = $stmt->fetchAll();
